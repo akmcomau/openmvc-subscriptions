@@ -150,7 +150,7 @@ class Subscriptions extends Controller {
 				$sub_type->delete();
 			}
 
-			throw new RedirectException($this->url->getURL('administrator/Subscriptions', 'types', ['delete-success']));
+			throw new RedirectException($this->url->getURL('administrator/Subscriptions', 'index', ['delete-success']));
 		}
 	}
 
@@ -164,7 +164,6 @@ class Subscriptions extends Controller {
 			$subscription->subscription_type_id = $form->getValue('subscription_type');
 			$type = $subscription->getModel('\modules\subscriptions\classes\models\SubscriptionType')->get(['id' => (int)$form->getValue('subscription_type')]);
 
-			$subscription->price = 0;
 			$subscription->expires = date('Y-m-d H:i:s', strtotime('now + '.$type->period_length.' '.$type->period));
 		}
 		else {

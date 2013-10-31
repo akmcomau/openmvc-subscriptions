@@ -30,11 +30,6 @@ class Subscription extends Model {
 			'data_type'      => 'datetime',
 			'null_allowed'   => FALSE,
 		],
-		'subscription_price' => [
-			'data_type'      => 'numeric',
-			'data_length'    => [6, 4],
-			'null_allowed'   => FALSE,
-		],
 	];
 
 	protected $indexes = [
@@ -77,5 +72,24 @@ class Subscription extends Model {
 		$this->objects['subscription_type'] = $this->getModel('\modules\subscriptions\classes\models\SubscriptionType')->get(['id' => $this->subscription_type_id]);
 
 		return $this->objects['subscription_type'];
+	}
+
+	public function getPricePaid() {
+		$subscription = $this->getCheckoutSubscription();
+		if ($subscription) {
+			return $subscription->price;
+		}
+
+		return 0;
+	}
+
+	public function getCheckoutSubscription() {
+		if (isset($this->objects['checkout_subscription'])) {
+			return $this->objects['checkout_subscription']->price;
+		}
+
+		$this->objects['checkout_subscription'] = $this->getModel('\modules\subscriptions\classes\models\CheckoutSubscription')->get(['subscription_id' => $this->id]);
+
+		return $this->objects['checkout_subscription'];
 	}
 }

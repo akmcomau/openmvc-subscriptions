@@ -30,10 +30,18 @@ class Installer {
 		$table->createTable();
 		$table->createIndexes();
 		$table->createForeignKeys();
+
+		$table = $model->getModel('\\modules\\subscriptions\\classes\\models\\CheckoutSubscription');
+		$table->createTable();
+		$table->createIndexes();
+		$table->createForeignKeys();
 	}
 
 	public function uninstall() {
 		$model = new Model($this->config, $this->database);
+
+		$table = $model->getModel('\\modules\\subscriptions\\classes\\models\\CheckoutSubscription');
+		$table->dropTable();
 
 		$table = $model->getModel('\\modules\\subscriptions\\classes\\models\\Subscription');
 		$table->dropTable();

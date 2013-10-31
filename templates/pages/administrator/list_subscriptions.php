@@ -70,7 +70,7 @@
 					<div class="pagination">
 						<?php echo $pagination->getPageLinks(); ?>
 					</div>
-					<form action="<?php echo $this->url->getURL('administrator/Subscriptions', 'deleteSubscriptions'); ?>" method="post">
+					<form action="<?php echo $this->url->getURL('administrator/Subscriptions', 'deleteSubscription'); ?>" method="post">
 						<table class="table">
 							<tr>
 								<th></th>
@@ -86,7 +86,7 @@
 								<td><?php echo $subscription->getCustomer()->email; ?></td>
 								<td><?php echo $subscription->created; ?></td>
 								<td><?php echo $subscription->expires; ?></td>
-								<td><?php echo money_format('%n', $subscription->price); ?></td>
+								<td><?php echo money_format('%n', $subscription->getPricePaid()); ?></td>
 								<td>
 									<a href="<?php echo $this->url->getURL('administrator/Subscriptions', 'editSubscription', [$subscription->id]); ?>" class="btn btn-primary"><i class="icon-edit-sign" title="<?php echo $text_edit; ?>"></i></a>
 								</td>
