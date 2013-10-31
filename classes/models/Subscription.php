@@ -48,4 +48,34 @@ class Subscription extends Model {
 		'customer_id'  => ['customer', 'customer_id'],
 		'subscription_type_id'  => ['subscription_type', 'subscription_type_id'],
 	];
+
+	protected $relationships = [
+		'customer' => [
+			'where_fields'  => [
+				'customer_first_name', 'customer_last_name',
+				'customer_login', 'customer_email'
+			],
+			'join_clause'   => 'JOIN customer USING (customer_id)',
+		],
+	];
+
+	public function getCustomer() {
+		if (isset($this->objects['customer'])) {
+			return $this->objects['customer'];
+		}
+
+		$this->objects['customer'] = $this->getModel('\core\classes\models\Customer')->get(['id' => $this->customer_id]);
+
+		return $this->objects['customer'];
+	}
+
+	public function getType() {
+		if (isset($this->objects['subscription_type'])) {
+			return $this->objects['subscription_type'];
+		}
+
+		$this->objects['subscription_type'] = $this->getModel('\modules\subscriptions\classes\models\SubscriptionType')->get(['id' => $this->subscription_type_id]);
+
+		return $this->objects['subscription_type'];
+	}
 }

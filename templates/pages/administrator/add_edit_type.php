@@ -5,8 +5,8 @@
 				<div class="widget">
 					<div class="widget-header">
 						<h3><?php
-							if ($is_add_page) echo $text_add_header;
-						 	else echo $text_update_header;
+							if ($is_add_page) echo $text_type_add_header;
+						 	else echo $text_type_update_header;
 						?></h3>
 					</div>
 					<div class="widget-content">
@@ -66,8 +66,8 @@
 						<hr class="separator-2column" />
 						<div class="col-md-12 align-center">
 							<button class="btn btn-primary" type="submit" name="form-subscription-type-submit"><?php
-								if ($is_add_page) echo $text_add_button;
-								else echo $text_update_button;
+								if ($is_add_page) echo $text_type_add_button;
+								else echo $text_type_update_button;
 							?></button>
 						</div>
 					</div>

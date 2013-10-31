@@ -4,7 +4,7 @@
 			<form class="admin-search-form" method="get" id="form-subscription-type-search">
 				<div class="widget">
 					<div class="widget-header">
-						<h3><?php echo $text_search; ?></h3>
+						<h3><?php echo $text_type_search; ?></h3>
 					</div>
 					<div class="widget-content">
 						<div class="row">
@@ -31,7 +31,7 @@
 		<div class="col-md-12">
 			<div class="widget">
 				<div class="widget-header">
-					<h3><?php echo $text_search_results; ?></h3>
+					<h3><?php echo $text_type_search_results; ?></h3>
 				</div>
 				<div class="widget-content">
 					<div class="pagination">

@@ -62,7 +62,7 @@ class Installer {
 				],
 				'checkout_subscriptions_add' => [
 					'controller' => 'administrator/Subscriptions',
-					'method' => 'add',
+					'method' => 'addSubscription',
 				],
 				'checkout_subscriptions_types' => [
 					'controller' => 'administrator/Subscriptions',
