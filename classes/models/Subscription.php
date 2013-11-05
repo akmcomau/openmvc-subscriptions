@@ -92,4 +92,25 @@ class Subscription extends Model {
 
 		return $this->objects['checkout_subscription'];
 	}
+
+	public function getSubscription($customer_id) {
+		$sql = "
+			SELECT * FROM subscription
+			WHERE subscription_id = (
+				SELECT subscription_id FROM subscription
+				WHERE
+					customer_id=".$this->database->quote($customer_id)."
+					AND subscription_expires > NOW()
+				ORDER BY subscription_expires DESC
+				LIMIT 1
+			)
+		";
+		$record = $this->database->querySingle($sql);
+		if ($record) {
+			return $this->getModel(__CLASS__, $record);
+		}
+		else {
+			return NULL;
+		}
+	}
 }

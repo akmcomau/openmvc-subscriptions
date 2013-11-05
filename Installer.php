@@ -86,8 +86,14 @@ class Installer {
 				],
 			],
 		]);
-
 		$main_menu->update();
+
+		$config = $this->config->getSiteConfig();
+		$config['sites'][$this->config->getSiteDomain()]['checkout']['item_types']['subscription'] = [
+			'checkout' => '\modules\subscriptions\classes\models\CheckoutSubscription',
+			'item' => '\modules\subscriptions\classes\models\SubscriptionType',
+		];
+		$this->config->setSiteConfig($config);
 	}
 
 	public function disable() {
@@ -102,10 +108,12 @@ class Installer {
 		$main_menu = new Menu($this->config, $language);
 		$main_menu->loadMenu('menu_admin_main.php');
 		$menu = $main_menu->getMenuData();
-
 		unset($menu['checkout']['children']['checkout_subscriptions']);
-
 		$main_menu->setMenuData($menu);
 		$main_menu->update();
+
+		$config = $this->config->getSiteConfig();
+		unset($config['sites'][$this->config->getSiteDomain()]['checkout']['item_types']['subscription']);
+		$this->config->setSiteConfig($config);
 	}
 }
