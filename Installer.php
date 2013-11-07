@@ -88,6 +88,14 @@ class Installer {
 		]);
 		$main_menu->update();
 
+		$user_menu = new Menu($this->config, $language);
+		$user_menu->loadMenu('menu_public_user.php');
+		$user_menu->insert_menu(['account', 'account_orders'], 'account_subscriptions', [
+			'controller' => 'customer/Subscriptions',
+			'method' => 'index',
+		]);
+		$user_menu->update();
+
 		$config = $this->config->getSiteConfig();
 		$config['sites'][$this->config->getSiteDomain()]['checkout']['item_types']['subscription'] = [
 			'checkout' => '\modules\subscriptions\classes\models\CheckoutSubscription',
@@ -111,6 +119,13 @@ class Installer {
 		unset($menu['checkout']['children']['checkout_subscriptions']);
 		$main_menu->setMenuData($menu);
 		$main_menu->update();
+
+		$user_menu = new Menu($this->config, $language);
+		$user_menu->loadMenu('menu_public_user.php');
+		$menu = $user_menu->getMenuData();
+		unset($menu['account']['children']['account_subscriptions']);
+		$user_menu->setMenuData($menu);
+		$user_menu->update();
 
 		$config = $this->config->getSiteConfig();
 		unset($config['sites'][$this->config->getSiteDomain()]['checkout']['item_types']['subscription']);

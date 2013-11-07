@@ -24,6 +24,8 @@
 	'search' => 'Search',
 	'expiry' => 'Expiry',
 	'created' => 'Created',
+	'expires' => 'Expires',
+	'reference' => 'Reference Number',
 
 	'subscription_add_header' => 'New Subscription',
 	'subscription_update_header' => 'Update Subscription',

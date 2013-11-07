@@ -38,7 +38,7 @@ class Subscriptions extends Controller {
 		$this->language->loadLanguageFile('administrator/subscriptions.php', 'modules'.DS.'subscriptions');
 		$form_search = $this->getSubscriptionSearchForm();
 
-		$pagination = new Pagination($this->request, 'name');
+		$pagination = new Pagination($this->request, 'created', 'desc');
 
 		$params = ['site_id' => ['type'=>'in', 'value'=>$this->allowedSiteIDs()]];
 		if ($form_search->validate()) {
@@ -156,7 +156,10 @@ class Subscriptions extends Controller {
 
 	protected function updateSubscriptionFromRequest(FormValidator $form, Subscription $subscription, $is_add_page) {
 		if ($is_add_page) {
-			$customer = $subscription->getModel('\core\classes\models\Customer')->get(['email' => $form->getValue('customer_email')]);
+			$customer = $subscription->getModel('\core\classes\models\Customer')->get([
+				'email' => $form->getValue('customer_email'),
+				'site_id' => ['type'=>'in', 'value'=>$this->allowedSiteIDs()]
+			]);
 			if ($customer) {
 				$subscription->customer_id = $customer->id;
 			}

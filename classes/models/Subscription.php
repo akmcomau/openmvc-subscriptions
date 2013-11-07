@@ -3,6 +3,7 @@
 namespace modules\subscriptions\classes\models;
 
 use core\classes\Model;
+use core\classes\Encryption;
 
 class Subscription extends Model {
 
@@ -77,7 +78,7 @@ class Subscription extends Model {
 	public function getPricePaid() {
 		$subscription = $this->getCheckoutSubscription();
 		if ($subscription) {
-			return $subscription->price;
+			return $subscription->getSellPrice();
 		}
 
 		return 0;
@@ -85,7 +86,7 @@ class Subscription extends Model {
 
 	public function getCheckoutSubscription() {
 		if (isset($this->objects['checkout_subscription'])) {
-			return $this->objects['checkout_subscription']->price;
+			return $this->objects['checkout_subscription']->getSellPrice();
 		}
 
 		$this->objects['checkout_subscription'] = $this->getModel('\modules\subscriptions\classes\models\CheckoutSubscription')->get(['subscription_id' => $this->id]);
@@ -112,5 +113,18 @@ class Subscription extends Model {
 		else {
 			return NULL;
 		}
+	}
+
+	public function decodeReferenceNumber($reference) {
+		return Encryption::defuscate($reference, $this->config->siteConfig()->secret);
+	}
+
+	public function getByReference($reference) {
+		$subscription_id = $this->decodeReferenceNumber($reference);
+		return $this->getModel(__CLASS__)->get(['id' => $subscription_id]);
+	}
+
+	public function getReferenceNumber() {
+		return Encryption::obfuscate($this->id, $this->config->siteConfig()->secret);
 	}
 }
