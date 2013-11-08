@@ -95,6 +95,10 @@ class Subscription extends Model {
 	}
 
 	public function getSubscription($customer_id) {
+		if (!(int)$customer_id) {
+			return NULL;
+		}
+
 		$sql = "
 			SELECT * FROM subscription
 			WHERE subscription_id = (
