@@ -47,7 +47,7 @@ class Subscriptions extends Controller {
 		$model = new Model($this->config, $this->database);
 		$subscription = $model->getModel('\modules\subscriptions\classes\models\Subscription')->getByReference($reference);
 		if (!$subscription || $subscription->customer_id != $this->authentication->getCustomerID()) {
-			throw new RedirectException($this->getURL('administrator/Error', 'error_404'));
+			throw new RedirectException($this->getUrl('administrator/Error', 'error_404'));
 		}
 
 		$data = [

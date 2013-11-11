@@ -24,7 +24,7 @@
 								<td><?php echo $subscription->expires; ?></td>
 								<td><?php echo money_format('%n', $subscription->getPricePaid()); ?></td>
 								<td>
-									<a href="<?php echo $this->url->getURL('customer/Subscriptions', 'view', [$subscription->getReferenceNumber()]); ?>" class="btn btn-primary"><i class="icon-edit-sign" title="<?php echo $text_edit; ?>"></i></a>
+									<a href="<?php echo $this->url->getUrl('customer/Subscriptions', 'view', [$subscription->getReferenceNumber()]); ?>" class="btn btn-primary"><i class="icon-edit-sign" title="<?php echo $text_edit; ?>"></i></a>
 								</td>
 							</tr>
 						<?php } ?>

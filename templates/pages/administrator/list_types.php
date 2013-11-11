@@ -37,7 +37,7 @@
 					<div class="pagination">
 						<?php echo $pagination->getPageLinks(); ?>
 					</div>
-					<form action="<?php echo $this->url->getURL('administrator/Subscriptions', 'deleteType'); ?>" method="post">
+					<form action="<?php echo $this->url->getUrl('administrator/Subscriptions', 'deleteType'); ?>" method="post">
 						<table class="table">
 							<tr>
 								<th></th>
@@ -53,7 +53,7 @@
 								<td><?php echo $type->getPeriodString($this->language); ?></td>
 								<td><?php echo money_format('%n', $type->price); ?></td>
 								<td>
-									<a href="<?php echo $this->url->getURL('administrator/Subscriptions', 'editType', [$type->id]); ?>" class="btn btn-primary"><i class="icon-edit-sign" title="<?php echo $text_edit; ?>"></i></a>
+									<a href="<?php echo $this->url->getUrl('administrator/Subscriptions', 'editType', [$type->id]); ?>" class="btn btn-primary"><i class="icon-edit-sign" title="<?php echo $text_edit; ?>"></i></a>
 								</td>
 							</tr>
 							<?php } ?>

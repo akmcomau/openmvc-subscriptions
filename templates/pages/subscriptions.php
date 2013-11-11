@@ -14,7 +14,7 @@
 					</div>
 					<div class="pricing-footer">
 						<p><?php echo $type->description; ?></p>
-						<form action="<?php echo $this->url->getURL('Cart', 'add', ['subscription', $type->id]); ?>" method="post">
+						<form action="<?php echo $this->url->getUrl('Cart', 'add', ['subscription', $type->id]); ?>" method="post">
 							<button type="submit"><?php echo $text_order_now; ?></button>
 						</form>
 					</div>

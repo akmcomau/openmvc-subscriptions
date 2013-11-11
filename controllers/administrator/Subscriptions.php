@@ -93,7 +93,7 @@ class Subscriptions extends Controller {
 		if ($form->validate()) {
 			$this->updateSubscriptionFromRequest($form, $subscription, TRUE);
 			$subscription->insert();
-			throw new RedirectException($this->url->getURL('administrator/Subscriptions', 'index', ['add-success']));
+			throw new RedirectException($this->url->getUrl('administrator/Subscriptions', 'index', ['add-success']));
 		}
 		elseif ($form->isSubmitted()) {
 			$this->updateSubscriptionFromRequest($form, $subscription, TRUE);
@@ -122,7 +122,7 @@ class Subscriptions extends Controller {
 		if ($form->validate()) {
 			$this->updateSubscriptionFromRequest($form, $subscription, FALSE);
 			$subscription->update();
-			throw new RedirectException($this->url->getURL('administrator/Subscriptions', 'index', ['add-success']));
+			throw new RedirectException($this->url->getUrl('administrator/Subscriptions', 'index', ['add-success']));
 		}
 		elseif ($form->isSubmitted()) {
 			$this->updateSubscriptionFromRequest($form, $subscription, FALSE);
@@ -150,7 +150,7 @@ class Subscriptions extends Controller {
 				$sub_type->delete();
 			}
 
-			throw new RedirectException($this->url->getURL('administrator/Subscriptions', 'index', ['delete-success']));
+			throw new RedirectException($this->url->getUrl('administrator/Subscriptions', 'index', ['delete-success']));
 		}
 	}
 
@@ -233,7 +233,7 @@ class Subscriptions extends Controller {
 		if ($form->validate()) {
 			$this->updateTypeFromRequest($form, $type);
 			$type->insert();
-			throw new RedirectException($this->url->getURL('administrator/Subscriptions', 'types', ['add-success']));
+			throw new RedirectException($this->url->getUrl('administrator/Subscriptions', 'types', ['add-success']));
 		}
 		elseif ($form->isSubmitted()) {
 			$this->updateTypeFromRequest($form, $type);
@@ -260,7 +260,7 @@ class Subscriptions extends Controller {
 		if ($form->validate()) {
 			$this->updateTypeFromRequest($form, $type);
 			$type->update();
-			throw new RedirectException($this->url->getURL('administrator/Subscriptions', 'types', ['update-success']));
+			throw new RedirectException($this->url->getUrl('administrator/Subscriptions', 'types', ['update-success']));
 		}
 		elseif ($form->isSubmitted()) {
 			$this->updateTypeFromRequest($form, $type);
@@ -284,7 +284,7 @@ class Subscriptions extends Controller {
 				$sub_type->delete();
 			}
 
-			throw new RedirectException($this->url->getURL('administrator/Subscriptions', 'types', ['delete-success']));
+			throw new RedirectException($this->url->getUrl('administrator/Subscriptions', 'types', ['delete-success']));
 		}
 	}
 
