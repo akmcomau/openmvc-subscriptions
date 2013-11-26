@@ -140,4 +140,8 @@ class SubscriptionType extends Model implements ItemInterface {
 	public function getCostPrice() {
 		return 0;
 	}
+
+	public function isShippable() {
+		return FALSE;
+	}
 }
