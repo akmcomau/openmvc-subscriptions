@@ -9,6 +9,11 @@ $_MODULE = [
 		"customer\\Subscriptions",
 		"administrator\\Subscriptions"
 	],
+	"hooks" => [
+		"authentication" => [
+			"init_authentication" => "classes\\Hooks",
+		]
+	],
 	"default_config" => [
 	]
 ];
