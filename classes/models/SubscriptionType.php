@@ -144,4 +144,8 @@ class SubscriptionType extends Model implements ItemInterface {
 	public function isShippable() {
 		return FALSE;
 	}
+
+	public function getCategoryName() {
+		return 'Subscription';
+	}
 }
