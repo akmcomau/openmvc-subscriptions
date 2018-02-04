@@ -109,8 +109,29 @@ class SubscriptionType extends Model implements ItemInterface {
 		return $this->name;
 	}
 
-	public function getPrice() {
-		return $this->price;
+	public function getSellPrice() {
+		$value = 0;
+		if ($this->config->moduleConfig('\modules\checkout')->show_prices_inc_tax) {
+			$value = $this->getSellIncTax();
+		}
+		else {
+			$value = $this->getSellPrice();
+		}
+
+		return $this->callPriceHook('getSellPrice', $value);
+	}
+
+	protected function callPriceHook($name, $price) {
+		$modules = (new Module($this->config))->getEnabledModules();
+		foreach ($modules as $module) {
+			if (isset($module['hooks']['checkout'][$name])) {
+				$class = $module['namespace'].'\\'.$module['hooks']['checkout'][$name];
+				$this->logger->debug("Calling Hook: $class::$name");
+				$class = new $class($this->config, $this->database, NULL);
+				$price = call_user_func_array(array($class, $name), [$price]);
+			}
+		}
+		return $price;
 	}
 
 	public function getSKU() {

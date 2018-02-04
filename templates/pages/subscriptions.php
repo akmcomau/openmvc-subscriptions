@@ -1,4 +1,4 @@
-<div class="<?php echo $page_div_class; ?>">
+<div class="<?php echo $page_class; ?>">
 	<h1>Subscriptions</h1>
 	<div class="row margin-bottom-40">
 		<?php foreach ($types as $type) { ?>
